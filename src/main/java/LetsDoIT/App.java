@@ -1,13 +1,9 @@
 package LetsDoIT;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+    public static void main( String[] args ) {
+
+        Database database = new Database();
+        database.connect();
+
     }
 }
