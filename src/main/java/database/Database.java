@@ -1,8 +1,8 @@
 package database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import components.Task;
+
+import java.sql.*;
 
 public class Database {
     private final String url = "jdbc:postgresql://localhost:5433/LetsDoIT";
@@ -24,5 +24,38 @@ public class Database {
         }
 
         return conn;
+    }
+
+    public long addRecord (Task task) {
+        String SQL = "INSERT INTO task(title,description) "
+                + "VALUES(?,?)";
+        long id = 0;
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(SQL,
+                     Statement.RETURN_GENERATED_KEYS)) {
+
+            pstmt.setString(1, task.getTitle());
+            pstmt.setString(2, task.getDescription());
+
+
+            int affectedRows = pstmt.executeUpdate();
+            // check the affected rows
+            if (affectedRows > 0) {
+                // get the ID back
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        id = rs.getLong(1);
+                        task.setI(id);
+                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return id;
+
     }
 }

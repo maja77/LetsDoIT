@@ -1,4 +1,4 @@
-package LetsDoIT;
+package letsDoIT;
 
 import static org.junit.Assert.assertTrue;
 
