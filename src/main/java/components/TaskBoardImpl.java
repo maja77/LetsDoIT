@@ -2,12 +2,12 @@ package components;
 
 import java.util.ArrayList;
 
-public class TaskList implements Board {
+public class TaskBoardImpl implements Board {
 
     final private ArrayList<Task> tasksList = new ArrayList<>();
 
 
-    public TaskList() {
+    public TaskBoardImpl() {
     }
 
     public void addTask(Task task) {
@@ -17,6 +17,7 @@ public class TaskList implements Board {
     public void delTask(Task task) {
         tasksList.remove(task);
     }
+
 
     @Override
     public void showContent() {

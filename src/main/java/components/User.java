@@ -9,8 +9,8 @@ public interface User {
     void delProjekt(Project project);
     void addLabel(Label newLabel);
     void delLabel(Label label);
-    void addTask(Task newTask, TaskList backlog);
-    void delTask(Task task, TaskList taskList);
+    void addTask(Task newTask, TaskBoardImpl backlog);
+    void delTask(Task task, TaskBoardImpl taskBoardImpl);
     void setStatus(Status status);
     void setDate();
     void setPriority(Priority priority);

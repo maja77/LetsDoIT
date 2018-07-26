@@ -66,13 +66,13 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void addTask(Task newTask, TaskList backlog) {
+    public void addTask(Task newTask, TaskBoardImpl backlog) {
         backlog.addTask(newTask);
     }
 
     @Override
-    public void delTask(Task task, TaskList taskList) {
-        taskList.delTask(task);
+    public void delTask(Task task, TaskBoardImpl taskBoardImpl) {
+        taskBoardImpl.delTask(task);
     }
 
     @Override

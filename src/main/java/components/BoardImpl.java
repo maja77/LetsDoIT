@@ -13,7 +13,8 @@ public class BoardImpl implements Board {
 
     @Override
     public void showContent() {
-
+// TODO
+//        jak zrobić content dla roznego typu list
 
     }
 }

@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 public interface Board {
 
-    void showContent();
+    public void showContent();
 }

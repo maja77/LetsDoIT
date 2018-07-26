@@ -6,7 +6,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        TaskList backlog = new TaskList();
+        TaskBoardImpl backlog = new TaskBoardImpl();
         User user1 = new UserImpl("maja@lysiak.com.pl", "Maja", "12345");
         Task firstTask = new Task("Task1", Priority.LOW, Status.TODO );
 
