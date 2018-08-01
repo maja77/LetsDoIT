@@ -26,7 +26,7 @@ public class Controller implements Initializable {
     private final ObservableList<Task1> tasks = FXCollections.observableArrayList();
 
     @FXML
-    private TableView<Task1> taskTable;
+    private TableView<Task1> taskTable = new TableView<Task1>();
 
     @FXML
     private TableColumn<Task1, Priority> priorityColumn;
@@ -43,11 +43,16 @@ public class Controller implements Initializable {
     @FXML
     private TextField taskDescription;
 
+    @FXML
+    private TextField taskTitle;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        taskDescription.setText("dupa");
+        taskDescription.setText("Enter description ...");
+        taskTitle.setText("Enter title ...");
 
         taskTable.setItems(tasks);
+
         titleColumn.setCellValueFactory(rowData -> rowData.getValue().titleProperty());
         descriptionColumn.setCellValueFactory(rowData -> rowData.getValue().descriptionProperty());
 
@@ -55,6 +60,5 @@ public class Controller implements Initializable {
                 new Task1(1,"Pierwszy task", "Taki sobie pierwszy task"),
                 new Task1(2,"Drugi task", "Taki sobie inny task"),
                 new Task1(3,"Trzeci task", "Taki sobie kolejny task"));
-
     }
 }

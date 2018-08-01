@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -9,13 +11,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<HBox fx:controller="letsDoIT.Controller" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="letsDoIT.Controller">
    <children>
-      <GridPane prefHeight="400.0" prefWidth="600.0">
+      <GridPane hgap="10.0" prefHeight="400.0" prefWidth="600.0" vgap="10.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="170.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="10.0" prefWidth="330.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="62.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="55.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.0" minWidth="10.0" prefWidth="111.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="244.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="70.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="306.0" minHeight="10.0" prefHeight="300.0" vgrow="SOMETIMES" />
@@ -23,17 +27,25 @@
           <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TableView prefHeight="300.0" prefWidth="774.0" GridPane.columnSpan="3">
+            <TableView fx:id="taskTable" prefHeight="286.0" prefWidth="398.0" GridPane.columnSpan="5">
                <columns>
-                  <!--<TableColumn fx:id="priorityColumn" prefWidth="51.0" text="Priority" />-->
-                  <!--<TableColumn fx:id="statusColumn" prefWidth="63.0" text="Status" />-->
-                  <TableColumn fx:id="titleColumn" minWidth="0.0" prefWidth="150.0" text="Name" />
-                  <TableColumn fx:id="descriptionColumn" prefWidth="335.0" text="Description" />
+                  <TableColumn fx:id="priorityColumn" prefWidth="65.0" text="Priority" />
+                   <TableColumn fx:id="statusColumn" prefWidth="65.0" text="Status" />
+                  <TableColumn fx:id="titleColumn" minWidth="0.0" prefWidth="120.0" text="Title" />
+                  <TableColumn fx:id="descriptionColumn" prefWidth="329.0" text="Description" />
                </columns>
             </TableView>
-            <TextField fx:id="taskDescription" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="taskDescription" prefHeight="25.0" prefWidth="395.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Add Task" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <ChoiceBox prefWidth="150.0" GridPane.rowIndex="1" />
+            <TextField fx:id="taskTitle" layoutX="276.0" layoutY="317.0" prefHeight="25.0" prefWidth="395.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </GridPane>
    </children>
 </HBox>
