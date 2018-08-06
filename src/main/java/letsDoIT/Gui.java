@@ -19,7 +19,7 @@ public class Gui extends Application {
 
 //        TaskBoardImpl backlog = new TaskBoardImpl();
 //        User user1 = new UserImpl("maja@lysiak.com.pl", "Maja", "12345");
-//        Task firstTask = new Task("Task1", Priority.LOW, Status.TODO);
+//        Task firstTask = new Task("Task", Priority.LOW, Status.TODO);
 //
 //        user1.addTask(firstTask, backlog);
 //
@@ -47,7 +47,7 @@ public class Gui extends Application {
 //    Database database = new Database();
 ////        database.connect();
 ////
-////                Task task1 = new Task("Task1", "Pierwszy task");
+////                Task task1 = new Task("Task", "Pierwszy task");
 ////
 ////                int ile = 20;
 ////                for(int i = 0;i < ile; i++){

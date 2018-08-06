@@ -15,11 +15,11 @@
    <children>
       <GridPane hgap="10.0" prefHeight="400.0" prefWidth="600.0" vgap="10.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="62.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="55.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.0" minWidth="10.0" prefWidth="111.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="244.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="70.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="47.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="64.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.0" minWidth="10.0" prefWidth="117.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="238.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="74.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="306.0" minHeight="10.0" prefHeight="300.0" vgrow="SOMETIMES" />
@@ -29,16 +29,20 @@
          <children>
             <TableView fx:id="taskTable" prefHeight="286.0" prefWidth="398.0" GridPane.columnSpan="5">
                <columns>
-                  <TableColumn fx:id="priorityColumn" prefWidth="65.0" text="Priority" />
-                   <TableColumn fx:id="statusColumn" prefWidth="65.0" text="Status" />
-                  <TableColumn fx:id="titleColumn" minWidth="0.0" prefWidth="120.0" text="Title" />
-                  <TableColumn fx:id="descriptionColumn" prefWidth="329.0" text="Description" />
+                  <TableColumn fx:id="priorityColumn" prefWidth="51.0" text="Priority" />
+                   <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="74.0" text="Status" />
+                   <TableColumn fx:id="titleColumn" minWidth="0.0" prefWidth="127.0" text="Title" />
+                  <TableColumn fx:id="descriptionColumn" minWidth="0.0" prefWidth="288.0" text="Description" />
+                  <TableColumn fx:id="idColumn" prefWidth="39.0" text="ID" />
+
                </columns>
             </TableView>
             <TextField fx:id="taskDescription" prefHeight="25.0" prefWidth="395.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Add Task" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <ChoiceBox prefWidth="150.0" GridPane.rowIndex="1" />
+            <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Add Task" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="setPriority" prefHeight="25.0" prefWidth="233.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
             <TextField fx:id="taskTitle" layoutX="276.0" layoutY="317.0" prefHeight="25.0" prefWidth="395.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="delButton" alignment="CENTER" layoutX="530.0" layoutY="364.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Delete Task" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="currentID" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <HBox.margin>
             <Insets />
