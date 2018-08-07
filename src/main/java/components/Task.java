@@ -1,52 +1,50 @@
 package components;
 
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Objects;
+
 public class Task {
 
+    private static int lastID = 0;
     private final ObjectProperty<Integer> mID = new SimpleObjectProperty<>();
     private final SimpleStringProperty mTitle = new SimpleStringProperty();
     private final SimpleStringProperty mDescription = new SimpleStringProperty();
     private final SimpleObjectProperty<Priority> mPriority = new SimpleObjectProperty<>(Priority.MID);
-//    private Priority mPriority = Priority.LOW;
     private final SimpleObjectProperty<Status> mStatus = new SimpleObjectProperty<>(Status.TODO);
-//    private Status mStatus = Status.TODO;
     private Label mLabel = new Label(null);
 
-    public Task() {
+    public static Task getObservableTask(){
+        return new Task();
     }
 
-    public Task(Integer id, String title, String description) {
-        mID.set(id);
+    private Task(){}
+
+    public Task(String title, String description) {
+        mID.set(generateID());
         mTitle.set(title);
         mDescription.set(description);
     }
 
-    public Task(Integer id, String title, String description, Priority priority) {
-        mID.set(id);
-        mTitle.set(title);
-        mDescription.set(description);
-        mPriority.set(priority);
-    }
-
-    public Task(Integer id, String title, String description, Priority priority, Status status) {
-        mID.set(id);
+    public Task(String title, String description, Priority priority) {
+        mID.set(generateID());
         mTitle.set(title);
         mDescription.set(description);
         mPriority.set(priority);
-        mStatus.set(status);
     }
 
-    public Task(Integer id, String title, String description, Priority priority, Status status, Label label) {
-        mID.set(id);
+    public Task(String title, String description, Priority priority, Status status) {
+        mID.set(generateID());
         mTitle.set(title);
         mDescription.set(description);
         mPriority.set(priority);
         mStatus.set(status);
-        mLabel = label;
+    }
+
+    private static int generateID(){
+        return ++lastID;
     }
 
     public Integer getID() {
@@ -130,5 +128,18 @@ public class Task {
     }
     public void setLabel(Label label) {
         mLabel = label;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return Objects.equals(mID, task.mID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mID);
     }
 }
