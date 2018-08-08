@@ -3,16 +3,18 @@ package letsDoIT;
 import components.Priority;
 import components.Status;
 import components.Task;
+import database.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
+import javafx.event.ActionEvent;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.*;
-import javafx.util.StringConverter;
-import javafx.util.converter.NumberStringConverter;
 
 
 public class Controller implements Initializable {
@@ -57,65 +59,98 @@ public class Controller implements Initializable {
     private Button delButton;
 
     @FXML
-    private TextField currentID;
+    private Button updButton;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        taskDescription.setText("Enter description ...");
-        taskTitle.setText("Enter title ...");
+
+
+        // Łączy observable listy z elementami graficznymi
         setPriority.setItems(priorities);
         taskTable.setItems(tasks);
 
-        setPriority.valueProperty().bindBidirectional(currentTask.priorityProperty());
-        taskDescription.textProperty().bindBidirectional(currentTask.descriptionProperty());
-        taskTitle.textProperty().bindBidirectional(currentTask.titleProperty());
-
-        StringConverter convert = new NumberStringConverter();
-        currentID.textProperty().bindBidirectional(currentTask.IDProperty(), convert);
-
+        // Wyświetlanie tasków w tabeli
+        idColumn.setCellValueFactory(rowData -> rowData.getValue().IDProperty());
         priorityColumn.setCellValueFactory(rowData -> rowData.getValue().priorityProperty());
         statusColumn.setCellValueFactory(rowData -> rowData.getValue().statusProperty());
         titleColumn.setCellValueFactory(rowData -> rowData.getValue().titleProperty());
         descriptionColumn.setCellValueFactory(rowData -> rowData.getValue().descriptionProperty());
-        idColumn.setCellValueFactory(rowData -> rowData.getValue().IDProperty());
-
 
 
         tasks.addAll(
-                new Task("Pierwszy task", "Taki sobie pierwszy task"),
+                new Task("Pierwszy task", "Taki sobie pierwszy task", Priority.HIGH),
                 new Task("Drugi task", "Taki sobie drugi task"),
                 new Task("Trzeci task", "Taki sobie trzeci task", Priority.LOW));
 
 
-        taskDescription.textProperty().addListener(observable -> {
+//        taskDescription.textProperty().addListener(observable -> {
 //                System.out.println("Zmieniona wartość DESCRIPTION to: " + ((ObservableValue)observable).getValue());
-        });
+//        });
+
+
+        // Zczytuje wybrany z listy task i wyswietla w okienkach (bindowanie poszczegolnych pol + listener dla Taska)
+        setPriority.valueProperty().bindBidirectional(currentTask.priorityProperty());
+        taskDescription.textProperty().bindBidirectional(currentTask.descriptionProperty());
+        taskTitle.textProperty().bindBidirectional(currentTask.titleProperty());
 
         taskTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> setCurrentTask(newValue));
 
 
-        addButton.setOnAction(event -> {
-            tasks.add(new Task (taskTitle.textProperty().getValue().toString(), taskDescription.textProperty().getValue().toString(), setPriority.getValue()));
+//        Obsługa buttona Add - Dodaje nowy task
+//        addButton.setOnAction(event -> {
+//            tasks.add(new Task (taskTitle.textProperty().getValue(), taskDescription.textProperty().getValue(), setPriority.getValue()));
+//        });
+
+
+        // Obsługa buttona Update - Updatuje wybrany task TODO
+        updButton.setOnAction(event -> {
+            Task t;
+            t = tasks.get(currentTask.getID());
+            t.setTitle(currentTask.getTitle());
+            t.setDescription(currentTask.getDescription());
+            t.setPriority(currentTask.getPriority());
         });
 
-        delButton.setOnAction(event -> {
-            Task highlightedTask = taskTable.getSelectionModel().selectedItemProperty().get();
-            tasks.remove(highlightedTask);
-        });
+        // Ustawia predefiniowany tekst w polach tekstowych
+        taskDescription.setText("Enter description ...");
+        taskTitle.setText("Enter title ...");
     }
 
 
+    @FXML
+    void addButtonClicked(ActionEvent event) {
+        tasks.add(new Task (taskTitle.textProperty().getValue(), taskDescription.textProperty().getValue(), setPriority.getValue()));
+    }
+
+    @FXML
+    void delButtonClicked(ActionEvent event) {
+        Alert delAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        delAlert.setHeaderText(null);
+        delAlert.setTitle("Delete Task");
+        delAlert.setContentText("You are going to delete selected task. Are you sure?");
+        delAlert.getButtonTypes().remove(0,2);
+        delAlert.getButtonTypes().add(0, ButtonType.YES);
+        delAlert.getButtonTypes().add(1,ButtonType.NO);
+        Optional<ButtonType> cofirmation = delAlert.showAndWait();
+        if(cofirmation.get() == ButtonType.YES) {
+            tasks.remove(taskTable.getSelectionModel().selectedItemProperty().get());
+            setCurrentTask(null);
+        }
+    }
+
     private void setCurrentTask(Task selectedTask) {
         if(selectedTask != null) {
-            currentTask.setID(selectedTask.getID());
             currentTask.setPriority(selectedTask.getPriority());
             currentTask.setTitle(selectedTask.getTitle());
             currentTask.setDescription(selectedTask.getDescription());
         } else {
-            currentTask.setID(null);
             currentTask.setPriority(Priority.MID);
             currentTask.setTitle(" ");
             currentTask.setDescription(" ");
         }
     }
 }
+
+

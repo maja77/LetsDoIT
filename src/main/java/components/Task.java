@@ -20,7 +20,8 @@ public class Task {
         return new Task();
     }
 
-    private Task(){}
+    public Task() {
+    }
 
     public Task(String title, String description) {
         mID.set(generateID());

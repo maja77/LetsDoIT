@@ -1,14 +1,13 @@
 package letsDoIT;
 
-import components.*;
+import database.Database;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.net.URL;
@@ -26,6 +25,8 @@ public class Gui extends Application {
 //        backlog.showContent();
 
         Application.launch(args);
+
+
     }
 
     @Override
@@ -34,23 +35,23 @@ public class Gui extends Application {
         HBox box = FXMLLoader.load(url);
 
         primaryStage.setTitle("LetsDoIT");
+        primaryStage.setAlwaysOnTop(false);
         primaryStage.setScene(new Scene(box));
+//        primaryStage.getOnCloseRequest(event -> {
+//            onClose(event);
+//        });
         primaryStage.show();
+
+        Database database = new Database();
+        database.connect();
 
     }
 
+//    private void onClose(WindowEvent event) {
+//        new Alert(Alert.AlertType.INFORMATION, event.getEventType().getName());
+//    }
 }
 
 
-// For later - connection with database
 
-//    Database database = new Database();
-////        database.connect();
-////
-////                Task task1 = new Task("Task", "Pierwszy task");
-////
-////                int ile = 20;
-////                for(int i = 0;i < ile; i++){
-////        System.out.println(("task: " + task1.getTitle() + " "+ task1.getDescription() + " has been added with id: ") + database.addRecord(task1)  );
-////
-////        }
+
