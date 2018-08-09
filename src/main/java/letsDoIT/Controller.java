@@ -19,11 +19,10 @@ import javafx.scene.control.*;
 
 public class Controller implements Initializable {
 
-    private final Task currentTask = Task.getObservableTask();
+    private Task currentTask = Task.getObservableTask();
 
-    private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+    private ObservableList<Task> tasks = FXCollections.observableArrayList();
     private final ObservableList<Priority> priorities = FXCollections.observableArrayList(Priority.LOW, Priority.MID, Priority.HIGH);
-
 
     @FXML
     private TableView<Task> taskTable = new TableView<>();
@@ -66,6 +65,10 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        Database database = new Database();
+        database.connect();
+
+        tasks = database.showAllRecords();
 
         // Łączy observable listy z elementami graficznymi
         setPriority.setItems(priorities);
@@ -78,18 +81,6 @@ public class Controller implements Initializable {
         titleColumn.setCellValueFactory(rowData -> rowData.getValue().titleProperty());
         descriptionColumn.setCellValueFactory(rowData -> rowData.getValue().descriptionProperty());
 
-
-        tasks.addAll(
-                new Task("Pierwszy task", "Taki sobie pierwszy task", Priority.HIGH),
-                new Task("Drugi task", "Taki sobie drugi task"),
-                new Task("Trzeci task", "Taki sobie trzeci task", Priority.LOW));
-
-
-//        taskDescription.textProperty().addListener(observable -> {
-//                System.out.println("Zmieniona wartość DESCRIPTION to: " + ((ObservableValue)observable).getValue());
-//        });
-
-
         // Zczytuje wybrany z listy task i wyswietla w okienkach (bindowanie poszczegolnych pol + listener dla Taska)
         setPriority.valueProperty().bindBidirectional(currentTask.priorityProperty());
         taskDescription.textProperty().bindBidirectional(currentTask.descriptionProperty());
@@ -99,9 +90,11 @@ public class Controller implements Initializable {
 
 
 //        Obsługa buttona Add - Dodaje nowy task
-//        addButton.setOnAction(event -> {
-//            tasks.add(new Task (taskTitle.textProperty().getValue(), taskDescription.textProperty().getValue(), setPriority.getValue()));
-//        });
+        addButton.setOnAction(event -> {
+            Task highlightedTask = new Task (taskTitle.textProperty().getValue(), taskDescription.textProperty().getValue(), setPriority.getValue());
+            tasks.add(highlightedTask);
+            database.addRecord(highlightedTask);
+        });
 
 
         // Obsługa buttona Update - Updatuje wybrany task TODO
@@ -113,16 +106,37 @@ public class Controller implements Initializable {
             t.setPriority(currentTask.getPriority());
         });
 
+//        Obsługa buttona Del - usuwa wybrany task
+        delButton.setOnAction(event -> {
+            Alert delAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            delAlert.setHeaderText(null);
+            delAlert.setTitle("Delete Task");
+            delAlert.setContentText("You are going to delete selected task. Are you sure?");
+            delAlert.getButtonTypes().remove(0,2);
+            delAlert.getButtonTypes().add(0, ButtonType.YES);
+            delAlert.getButtonTypes().add(1,ButtonType.NO);
+            Optional<ButtonType> cofirmation = delAlert.showAndWait();
+            if(cofirmation.get() == ButtonType.YES) {
+                int currentId = taskTable.getSelectionModel().selectedIndexProperty().get();
+                int currentDBId = taskTable.getSelectionModel().getSelectedItem().getID();
+                tasks.remove(currentId);
+                database.delRecord(currentDBId);
+                setCurrentTask(null);
+            }
+        });
+
+
         // Ustawia predefiniowany tekst w polach tekstowych
         taskDescription.setText("Enter description ...");
         taskTitle.setText("Enter title ...");
+
     }
 
 
-    @FXML
-    void addButtonClicked(ActionEvent event) {
-        tasks.add(new Task (taskTitle.textProperty().getValue(), taskDescription.textProperty().getValue(), setPriority.getValue()));
-    }
+//    @FXML
+//    void addButtonClicked(ActionEvent event) {
+//        tasks.add(new Task (taskTitle.textProperty().getValue(), taskDescription.textProperty().getValue(), setPriority.getValue()));
+//    }
 
     @FXML
     void delButtonClicked(ActionEvent event) {

@@ -42,8 +42,8 @@ public class Gui extends Application {
 //        });
         primaryStage.show();
 
-        Database database = new Database();
-        database.connect();
+
+
 
     }
 

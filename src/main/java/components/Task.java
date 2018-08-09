@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Task {
 
-    private static int lastID = 0;
+//    private static int lastID = 0;
     private final ObjectProperty<Integer> mID = new SimpleObjectProperty<>();
     private final SimpleStringProperty mTitle = new SimpleStringProperty();
     private final SimpleStringProperty mDescription = new SimpleStringProperty();
@@ -23,30 +23,38 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, String description) {
-        mID.set(generateID());
-        mTitle.set(title);
-        mDescription.set(description);
-    }
-
     public Task(String title, String description, Priority priority) {
-        mID.set(generateID());
         mTitle.set(title);
         mDescription.set(description);
         mPriority.set(priority);
-    }
 
+    }
     public Task(String title, String description, Priority priority, Status status) {
-        mID.set(generateID());
         mTitle.set(title);
         mDescription.set(description);
         mPriority.set(priority);
         mStatus.set(status);
     }
 
-    private static int generateID(){
-        return ++lastID;
+    public Task(Integer id, String title, String description, Priority priority) {
+        mID.set(id);
+//        mID.set(generateID());
+        mTitle.set(title);
+        mDescription.set(description);
+        mPriority.set(priority);
     }
+    public Task(Integer id, String title, String description, Priority priority, Status status) {
+        mID.set(id);
+//        mID.set(generateID());
+        mTitle.set(title);
+        mDescription.set(description);
+        mPriority.set(priority);
+        mStatus.set(status);
+    }
+
+//    private static int generateID(){
+//        return ++lastID;
+//    }
 
     public Integer getID() {
         return mID.get();
@@ -60,6 +68,7 @@ public class Task {
         mID.set(ID);
     }
 
+
     public String getTitle() {
         return mTitle.get();
     }
@@ -72,6 +81,7 @@ public class Task {
         mTitle.set(title);
     }
 
+
     public String getDescription() {
         return mDescription.get();
     }
@@ -83,13 +93,6 @@ public class Task {
     public void setDescription(String description) {
         mDescription.set(description);
     }
-
-//    public Priority getPriority() {
-//        return mPriority;
-//    }
-//    public void setPriority(Priority priority) {
-//        mPriority = priority;
-//    }
 
 
     public Priority getPriority() {

@@ -37,8 +37,10 @@
 
                </columns>
             </TableView>
+
+
             <TextField fx:id="taskDescription" prefHeight="25.0" prefWidth="395.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-            <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="25.0" prefWidth="72.0" text="Add Task" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Add Task" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="setPriority" prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="taskTitle" layoutX="276.0" layoutY="317.0" prefHeight="25.0" prefWidth="395.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Button fx:id="delButton" alignment="CENTER" layoutX="530.0" layoutY="364.0" mnemonicParsing="false" onAction="#delButtonClicked" prefHeight="25.0" prefWidth="80.0" text="Delete Task" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2" />
