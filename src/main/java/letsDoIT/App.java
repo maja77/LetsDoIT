@@ -1,18 +1,16 @@
 package letsDoIT;
 
-import database.Database;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.net.URL;
 
-public class Gui extends Application {
+public class App extends Application {
 
     public static void main(String[] args) {
 
@@ -31,25 +29,18 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        URL url = new File("src/main/java/letsDoIT/Gui.fxml").toURI().toURL();
+        URL url = new File("src/main/java/letsDoIT/App.fxml").toURI().toURL();
         HBox box = FXMLLoader.load(url);
 
         primaryStage.setTitle("LetsDoIT");
         primaryStage.setAlwaysOnTop(false);
         primaryStage.setScene(new Scene(box));
-//        primaryStage.getOnCloseRequest(event -> {
-//            onClose(event);
-//        });
         primaryStage.show();
 
 
 
 
     }
-
-//    private void onClose(WindowEvent event) {
-//        new Alert(Alert.AlertType.INFORMATION, event.getEventType().getName());
-//    }
 }
 
 

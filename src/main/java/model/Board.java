@@ -1,6 +1,4 @@
-package components;
-
-import java.util.ArrayList;
+package model;
 
 public interface Board {
 

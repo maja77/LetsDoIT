@@ -1,4 +1,4 @@
-package components;
+package model;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -107,12 +107,6 @@ public class Task {
         mPriority.set(priority);
     }
 
-//    public Status getStatus() {
-//        return mStatus;
-//    }
-//    public void setStatus(Status status) {
-//        mStatus = status;
-//    }
 
 
     public Status getStatus() {
@@ -126,6 +120,7 @@ public class Task {
     public void setStatus(Status status) {
         mStatus.set(status);
     }
+
 
     public Label getLabel() {
         return mLabel;

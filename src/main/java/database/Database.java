@@ -1,16 +1,15 @@
 package database;
 
-import components.Priority;
-import components.Status;
-import components.Task;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import com.sun.xml.internal.bind.v2.TODO;
+import model.Priority;
+import model.Status;
+import model.Task;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.util.ArrayList;
+
 
 public class Database {
     private final String url = "jdbc:postgresql://localhost:5433/LetsDoIT";
@@ -81,6 +80,23 @@ public class Database {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void updRecord(Task task, int id) {
+        String SQL = "UPDATE task SET title=?, description=?, priority=? WHERE id=?";
+        try {
+            Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+
+            pstmt.setString(1, task.getTitle());
+            pstmt.setString(2, task.getDescription());
+            pstmt.setString(3, task.getPriority().toString());
+            pstmt.setInt(4,id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
 
     }
 
@@ -91,7 +107,7 @@ public class Database {
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery("SELECT * FROM task");
 
-
+//          TODO moze da sie ponizszy kod jakos zgrabniej napisac ...
             while(result.next()) {
                 int id = result.getInt("id");
                 String title = result.getString("title");
