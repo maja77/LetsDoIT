@@ -105,6 +105,7 @@ public class Controller implements Initializable {
             chosenTask.setPriority(currentTask.getPriority());
             chosenTask.setTitle(currentTask.getTitle());
             chosenTask.setDescription(currentTask.getDescription());
+
             database.updRecord(chosenTask, currentDBId);
         });
 
@@ -161,6 +162,11 @@ public class Controller implements Initializable {
             currentTask.setPriority(selectedTask.getPriority());
             currentTask.setTitle(selectedTask.getTitle());
             currentTask.setDescription(selectedTask.getDescription());
+
+//            setPriority.setValue(currentTask.getPriority());
+//            taskDescription.setText(currentTask.getDescription());
+//            taskTitle.setText(currentTask.getTitle());
+
         } else {
             currentTask.setPriority(Priority.MID);
             currentTask.setTitle(" ");

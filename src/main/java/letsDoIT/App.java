@@ -29,7 +29,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        URL url = new File("src/main/java/letsDoIT/App.fxml").toURI().toURL();
+        URL url = new File("src/main/java/letsDoIT/HomePage.fxml").toURI().toURL();
         HBox box = FXMLLoader.load(url);
 
         primaryStage.setTitle("LetsDoIT");
